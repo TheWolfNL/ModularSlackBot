@@ -29,6 +29,7 @@ func (bot *Module) AddTrigger(regex string, handler func(message Message)) {
 func (bot *Module) HandleInput(message Message) {
 	trigger, err := bot.checkForTriggers(message)
 	if err == nil {
+		bot.SetChannel(message.Channel)
 		trigger.handler(message)
 	}
 }
@@ -92,9 +93,10 @@ func (bot *Module) SetVersion(version string) {
 }
 
 func (bot *Module) Respond(message string) {
-	fmt.Printf("\nSending '%s' to #%s\n", message, bot.Channel)
+	fmt.Printf("\nSending to #%s\n", message, bot.Channel)
+	fmt.Printf("Response: %s\n", message)
 	if bot.Slack == nil {
-		fmt.Printf("Response: %s\n", message)
+		fmt.Printf("Message not sent to slack because slack api is not configured\n", message)
 	} else {
 		params := slack.PostMessageParameters{
 			AsUser: true,
