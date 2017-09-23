@@ -26,7 +26,6 @@ func main() {
 	test := example.New()
 	reminder := reminder.New()
 	test.SetSlackApi(api)
-	build.SetSlackApi(api)
 
 	logger := log.New(os.Stdout, "messages-bot: ", log.Lshortfile|log.LstdFlags)
 	slack.SetLogger(logger)
