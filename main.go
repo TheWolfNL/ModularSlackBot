@@ -9,9 +9,8 @@ import (
 	"github.com/thewolfnl/ModularSlackBot/bot"
 
 	// Be sure to include the modules you want to use
-
-	"github.com/thewolfnl/ModularSlackBot/modules/example"
-	"github.com/thewolfnl/ModularSlackBot/modules/reminder"
+	"github.com/TheWolfNL/ModularSlackBot-example-module-hello"
+	"github.com/TheWolfNL/ModularSlackBot-example-module-reminder"
 )
 
 var questions = []string{
@@ -26,6 +25,7 @@ func main() {
 	test := example.New()
 	reminder := reminder.New()
 	test.SetSlackApi(api)
+	reminder.SetSlackApi(api)
 
 	logger := log.New(os.Stdout, "messages-bot: ", log.Lshortfile|log.LstdFlags)
 	slack.SetLogger(logger)
