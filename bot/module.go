@@ -93,10 +93,10 @@ func (bot *Module) SetVersion(version string) {
 }
 
 func (bot *Module) Respond(message string) {
-	fmt.Printf("\nSending to #%s\n", message, bot.Channel)
+	fmt.Printf("\nSending to #%s\n", bot.Channel)
 	fmt.Printf("Response: %s\n", message)
 	if bot.Slack == nil {
-		fmt.Printf("Message not sent to slack because slack api is not configured\n", message)
+		fmt.Print("Message not sent to slack because slack api is not configured\n")
 	} else {
 		params := slack.PostMessageParameters{
 			AsUser: true,
