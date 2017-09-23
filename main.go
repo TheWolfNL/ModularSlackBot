@@ -1,13 +1,17 @@
 package main
 
 import (
-	"encoding/json"
 	"fmt"
 	"log"
 	"os"
 
 	"github.com/nlopes/slack"
-	"github.com/thewolfnl/ModularSlackBot/modules"
+	"github.com/thewolfnl/ModularSlackBot/bot"
+
+	// Be sure to include the modules you want to use
+
+	"github.com/thewolfnl/ModularSlackBot/modules/example"
+	"github.com/thewolfnl/ModularSlackBot/modules/reminder"
 )
 
 var questions = []string{
@@ -18,9 +22,11 @@ var questions = []string{
 }
 
 func main() {
-	api := slack.New("bot-token")
-	test := test.New()
+	api := slack.New("xoxb-123-ABC123")
+	test := example.New()
+	reminder := reminder.New()
 	test.SetSlackApi(api)
+	build.SetSlackApi(api)
 
 	logger := log.New(os.Stdout, "messages-bot: ", log.Lshortfile|log.LstdFlags)
 	slack.SetLogger(logger)
@@ -52,17 +58,16 @@ Loop:
 				// Handle new message to channel
 
 				// Only respond to real users. Bots have BotIDs, users do not
-				if ev.Msg.BotID == "" {
+				// if ev.Msg.BotID == "" {
 
-					message, err := json.Marshal(ev.Msg)
-					if err != nil {
-						fmt.Println(err)
-						return
-					}
-					fmt.Printf("Message: %s\nJson: %s \n", ev.Msg, string(message))
+				message := bot.Message{ev}
+				// fmt.Printf("Message: %s \n", message.ToJson())
+				if !message.IsBot() {
 					test.SetChannel(ev.Msg.Channel)
-					test.HandleInput(ev.Msg.Text)
+					test.HandleInput(message)
 				}
+				reminder.HandleInput(message)
+				// }
 
 			case *slack.ReactionAddedEvent:
 				// Handle reaction added

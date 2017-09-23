@@ -12,14 +12,28 @@ make changes to `modules/test.go`
 
 # Roadmap
 v1.0
-- move RTM to bot
-- improve project structure
+√ improve project structure
+- change structs
+    - Bot
+        Add functions to allow module management on the bot
+        - integrate RTM into bot
+        - let bot handle 
+        - activating/deactivating a module
+        - triggering module info
+        - triggering module help
+        Contains interaction with slack, default functions to allow basic desired functionality
+
+        - change Message struct to provide the actual channel name
+        - change Message struct to provide the actual user name
+
+    - Module
+        - change Module struct to remove configuration struct because it should be part of the module itself
+- create example bot project
+- create example module project
 - create tests
-- create example project
 - Solely Trigger based
 
 v1.1
-- allow for more interaction by giving access to message event (to access username)
 - add time based triggers (cron)
 
 v1.2
