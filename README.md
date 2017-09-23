@@ -12,7 +12,7 @@ make changes to `modules/test.go`
 
 # Roadmap
 v1.0
-√ improve project structure
+- √ improve project structure
 - change structs
     - Bot
         Add functions to allow module management on the bot
