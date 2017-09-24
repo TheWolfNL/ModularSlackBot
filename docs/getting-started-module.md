@@ -15,6 +15,5 @@ I'd personally advise the use of [VS Code](https://code.visualstudio.com/) with 
 1. You can add tests by copying and altering `func ExampleHello()` in the `example_test.go` file.
 1. To run tests call `go test -v` in commandline
 
-## Getting your module listed
+## Public Module?
 If you've created a public module you can get it listed on [the module page](modules.md).
-Just create an [issue](https://github.com/TheWolfNL/ModularSlackBot/issues/new) with the label `module-listing` and we'll add it as soon as possible. 
