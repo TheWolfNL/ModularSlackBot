@@ -4,5 +4,6 @@ We'll list public modules here in the future
 ## Making your own module?
 see this [repository](https://github.com/TheWolfNL/ModularSlackBot-example-module-hello) to get you going.
 
-### Additional examples
+## Example Modules
+* [Hello Module](https://github.com/TheWolfNL/ModularSlackBot-example-module-hello)
 * [Reminder Module [WIP]](https://github.com/TheWolfNL/ModularSlackBot-example-module-reminder)

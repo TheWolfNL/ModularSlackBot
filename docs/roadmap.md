@@ -1,5 +1,5 @@
 # Roadmap
-v1.0
+## v1.0
 - √ improve project structure
 - √ create example module project
 - change structs
@@ -21,8 +21,8 @@ v1.0
 - create tests
 - Solely Trigger based
 
-v1.1
+## v1.1
 - add time based triggers (cron)
 
-v1.2
+## v1.2
 - add interactive mode

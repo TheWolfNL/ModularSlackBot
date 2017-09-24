@@ -7,6 +7,13 @@ module.AddTrigger("ping", func(message bot.Message) {
 ```
 This example trigger will listen to "ping" inside a message. You can use regular expressions to define this trigger.
 
+## Features
+It's very likely that during development you'd want additional functionality, don't hesitate to create an [issue](https://github.com/TheWolfNL/ModularSlackBot/issues/new) (please add the `feature request` label), and I'll try to help you out.
+
+## Problems
+If it's your first GO project is can de a bit discouraging because the strictness will give errors, if you google the error you'll find some answers.
+If google doesn't solve your problem, please create an [issue](https://github.com/TheWolfNL/ModularSlackBot/issues/new) and I'll try to help.
+
 ## Regex
 Use a website like [Regex101](https://regex101.com/) and select `Golang` as flavor.
 
