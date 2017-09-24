@@ -1,5 +1,5 @@
 # Triggers
-Use the following code and change the repsonse message and trigger regex.
+Use the following code and change the repsonse message and trigger [regular expression](#regular-expressions).
 ```
 module.AddTrigger("ping", func(message bot.Message) {
     module.Respond("pong")
@@ -12,9 +12,10 @@ It's very likely that during development you'd want additional functionality, do
 
 ## Problems
 If it's your first GO project is can de a bit discouraging because the strictness will give errors, if you google the error you'll find some answers.
+Please keep in mind that when you're googling for a solution you sometimes need to substitute `go` for `golang` to avoid undesired results. 
 If google doesn't solve your problem, please create an [issue](https://github.com/TheWolfNL/ModularSlackBot/issues/new) and I'll try to help.
 
-## Regex
+## Regular Expressions
 Use a website like [Regex101](https://regex101.com/) and select `Golang` as flavor.
 
 Copy the following lines into the `test string` area
