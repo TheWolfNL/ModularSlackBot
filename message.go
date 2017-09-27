@@ -23,3 +23,17 @@ func (message *Message) ToJson() string {
 	}
 	return string(messageJson)
 }
+
+func CreateMessage(messageString string) *Message {
+	message := &Message{}
+	messageJson := `{
+		"channel": "C2147483705",
+		"user": "U2147483697",
+		"text": "Hello world"
+		}`
+	if err := json.Unmarshal([]byte(messageJson), &message); err != nil {
+		return &Message{}
+	}
+	message.Text = messageString
+	return message
+}
