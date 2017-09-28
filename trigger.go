@@ -5,4 +5,4 @@ type Trigger struct {
 	handler TriggerFunc
 }
 
-type TriggerFunc func(message *Message) error
+type TriggerFunc func(message *Message)

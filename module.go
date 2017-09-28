@@ -6,29 +6,12 @@ import (
 	"fmt"
 	"html/template"
 	"regexp"
-
-	"github.com/nlopes/slack"
 )
-
-type ModuleInterface interface {
-	Name() string
-	Version() string
-	Status() bool
-	AcceptsBotMessages() bool
-	Help() string
-	Info()
-	HandleInput(*Message)
-	Respond(string)
-	AddTrigger(string, TriggerFunc)
-	AcceptBotMessages()
-	SetSlackApi(*slack.Client)
-}
 
 type Module struct {
 	// Internal
-	slack    *slack.Client
+	bot      *Bot
 	triggers []Trigger
-	channel  string
 
 	// Properties
 	name    string
@@ -61,14 +44,14 @@ func (module *Module) AcceptsBotMessages() bool {
 	return module.acceptBotMessages
 }
 
-func (module *Module) SetSlackApi(client *slack.Client) {
-	module.slack = client
+func (module *Module) SetBot(bot *Bot) {
+	module.bot = bot
 }
 
 func (module *Module) AddTrigger(regex string, handler TriggerFunc) {
-	trigger := Trigger{regex, func(message *Message) error {
+	trigger := Trigger{regex, func(message *Message) {
 		h := handler
-		return h(message)
+		h(message)
 	}}
 	module.triggers = append(module.triggers, trigger)
 }
@@ -76,13 +59,8 @@ func (module *Module) AddTrigger(regex string, handler TriggerFunc) {
 func (module *Module) HandleInput(message *Message) {
 	trigger, err := module.checkForTriggers(message)
 	if err == nil {
-		module.SetChannel(message.Channel)
 		trigger.handler(message)
 	}
-}
-
-func (module *Module) SetChannel(channelId string) {
-	module.channel = channelId
 }
 
 func (module *Module) checkForTriggers(message *Message) (*Trigger, error) {
@@ -135,28 +113,6 @@ func (module *Module) Version() string {
 
 func (module *Module) SetVersion(version string) {
 	module.version = version
-}
-
-func (module *Module) Respond(message string) {
-	if module == nil {
-		return
-	}
-	fmt.Printf("\nSending to #%s\n", module.channel)
-	fmt.Printf("Response: %s\n", message)
-	if module.slack == nil {
-		fmt.Print("Message not sent to slack because slack api is not configured\n")
-	} else {
-		params := slack.PostMessageParameters{
-			AsUser: true,
-		}
-
-		channelID, timestamp, err := module.slack.PostMessage(module.channel, message, params)
-		if err != nil {
-			fmt.Printf("%s\n", err)
-			return
-		}
-		fmt.Printf("Message successfully sent to channel %s at %s\n", channelID, timestamp)
-	}
 }
 
 func (module *Module) Info() {
